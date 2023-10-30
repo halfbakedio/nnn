@@ -37,7 +37,10 @@ defmodule NnnWeb.Router do
     scope "/dev" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: NnnWeb.Telemetry
+      live_dashboard "/dashboard",
+        metrics: NnnWeb.Telemetry,
+        ecto_repos: [Nnn.Repo],
+        ecto_psql_extras_options: [long_running_queries: [threshold: "200 milliseconds"]]
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
