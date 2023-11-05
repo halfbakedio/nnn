@@ -1,6 +1,7 @@
 defmodule NnnWeb.Router do
   use NnnWeb, :router
 
+  import PhoenixStorybook.Router
   import NnnWeb.UserAuth
 
   pipeline :browser do
@@ -44,8 +45,20 @@ defmodule NnnWeb.Router do
         metrics: NnnWeb.Telemetry,
         ecto_repos: [Nnn.Repo],
         ecto_psql_extras_options: [long_running_queries: [threshold: "200 milliseconds"]]
+
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
+  end
+
+  ## Storybook routes
+
+  scope "/" do
+    storybook_assets()
+  end
+
+  scope "/", NnnWeb do
+    pipe_through(:browser)
+    live_storybook("/storybook", backend_module: NnnWeb.Storybook)
   end
 
   ## Authentication routes

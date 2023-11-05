@@ -1,0 +1,3 @@
+console:
+  summary: connect to the production console, must have done `fly ssh issue --agent` first
+  exec: fly ssh console --pty -C "/app/bin/nnn remote

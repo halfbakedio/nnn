@@ -1,3 +1,7 @@
 dev:
-  summary: start the server in development mode
-  exec: mix phx.server
+  summary: development commands
+  exec: robo --config {{ .robo.path }}/.robo/dev.yml
+
+prod:
+  summary: production commands
+  exec: robo --config {{ .robo.path }}/.robo/prod.yml

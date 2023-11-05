@@ -1,0 +1,3 @@
+server:
+  summary: start the server in development mode
+  exec: mix phx.server
